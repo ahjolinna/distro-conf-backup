@@ -1,0 +1,79 @@
+background no
+font SourceSansPro-Regular:size=9
+#xftfont Sans:size=12
+use_xft yes
+xftalpha 0.9
+update_interval 1.0
+total_run_times 0
+own_window yes
+own_window_type normal
+own_window_argb_visual true
+own_window_transparent yes
+#own_windiw_class conky
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+minimum_size 210 5
+maximum_width 250
+draw_shades no
+draw_outline no
+draw_borders yes
+draw_graph_borders yes
+default_color ffffff
+default_shade_color ffffff
+default_outline_color 828282
+alignment top_left
+gap_x 1664
+gap_y 102
+no_buffers yes
+uppercase no
+cpu_avg_samples 2
+override_utf8_locale yes
+
+TEXT
+#									${font OpenLogos:pixelsize=100}Y${font}
+								${font SourceSerifPro-Bold:size=17}CHAKRA-Linux${font}
+SYSTEM${hr 1}
+
+Hostname: $alignr$nodename
+Kernel: $alignr$kernel
+Uptime: $alignr$uptime
+#CPU Temperature: ${alignr}${hwmon temp 1}C°
+CPU Temperature:$alignr${execi 10 sensors | grep ^temp1 | tail -n 1 |awk '{print $2}'}
+CPU: ${alignr}${freq} MHz
+Processes: ${alignr}$processes ($running_processes running)
+Load: ${alignr}$loadavg
+${hr 1}
+CPU1 ${alignr}${cpu cpu1}%
+${cpubar 4 cpu1}
+CPU2 ${alignr}${cpu cpu2}%
+${cpubar 4 cpu2}
+CPU3 ${alignr}${cpu cpu3}%
+${cpubar 4 cpu3}
+CPU4 ${alignr}${cpu cpu4}%
+${cpubar 4 cpu4}
+${hr 1}
+Ram ${alignr}$mem / $memmax ($memperc%)
+${membar 4}
+${hr 1}
+Highest CPU:$alignr CPU%$alignr            |$alignr            MEM%
+${top name 1}$alignr${top cpu 1}$alignr            |$alignr            ${top mem 1}
+${top name 2}$alignr${top cpu 2}$alignr            |$alignr            ${top mem 2}
+${top name 3}$alignr${top cpu 3}$alignr            |$alignr            ${top mem 3}
+${hr 1}
+Highest MEM: $alignr CPU%$alignr            |$alignr            MEM%
+${top_mem name 1}$alignr${top_mem cpu 1}$alignr            |$alignr            ${top_mem mem 1}
+${top_mem name 2}$alignr${top_mem cpu 2}$alignr            |$alignr            ${top_mem mem 2}
+${top_mem name 3}$alignr${top_mem cpu 3}$alignr            |$alignr            ${top_mem mem 3}
+${hr 1}
+#${color black}Filesystem ${hr 1}${color}
+Filesystem${hr 1}
+
+Root: ${alignr}${fs_used /} / ${fs_size /}
+${fs_bar 4 /}
+Home: ${alignr}${fs_used /home} / ${fs_size /home}
+${fs_bar 4 /home}
+#${color black}NETWORK ${hr 1}${color}
+NETWORK: ${addr enp0s31f6} ${hr 1}
+
+${if_existing /sys/class/net/enp0s31f6/operstate up}${color #ffffff}E: Down:${color #ffffff} ${downspeedf enp0s31f6} k/s (${tcp_portmon 32768 61000 count}) $alignr${color #ffffff}Up:${color #ffffff} ${upspeedf enp0s31f6} k/s (${tcp_portmon 1 32767 count})
+${color #ffffff} ${downspeedgraph enp0s31f6 22,150 ffffff e23632 -l}${alignr 10}${color #ffffff}${upspeedgraph enp0s31f6 22,150 ffffff e23632 -l}${endif}
