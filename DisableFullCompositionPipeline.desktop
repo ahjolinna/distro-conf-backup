@@ -1,0 +1,14 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Disable FullCompositionPipeline
+GenericName=disable "FullCompositionPipeline"
+Comment=if u have some problmes with some app/game with FullCompositionPipeline, you can disable it
+Exec=sh -c "nvidia-settings --assign CurrentMetaMode=\"$(nvidia-settings -t -q CurrentMetaMode |tr -d "\n"|sed 's/.*:://'|sed 's/^ *//;s/ *$//')\""
+Icon=kwin
+NoDisplay=false
+Path[$e]=
+StartupNotify=true
+Terminal=1
+TerminalOptions=
+Type=Application
+Categories=Utility;

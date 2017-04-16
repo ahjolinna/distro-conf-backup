@@ -1,0 +1,14 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Enable FullCompositionPipeline
+GenericName=enable "FullCompositionPipeline"
+Comment=usually need to be re-enabled when opening some games/apps,this is to fix kwin screen tearing
+Exec=sh -c "nvidia-settings --assign CurrentMetaMode=\\"$(nvidia-settings -t -q CurrentMetaMode |tr -d "\\n"|sed 's/ViewPortIn=/ForceFullCompositionPipeline=On, ViewPortIn=/g'|sed 's/.*:://'|sed 's/^ *//;s/ *$//')\\""
+Icon=kwin
+NoDisplay=false
+Path[$e]=
+StartupNotify=true
+Terminal=1
+TerminalOptions=
+Type=Application
+Categories=Utility;
