@@ -1,6 +1,0 @@
-[Desktop Entry]
-Exec=nvidia-settings -a [gpu:0]/GpuPowerMizerMode=1
-Icon=system-run
-Path=
-Terminal=false
-Type=Application
